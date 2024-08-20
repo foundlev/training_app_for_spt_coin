@@ -1,0 +1,30 @@
+{
+  "name": "Training SPT",
+  "short_name": "Training SPT",
+  "start_url": "/training_app_for_spt_coin/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4169E1",
+  "icons": [
+    {
+      "src": "icons/image_64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/image_128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/image_256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/image_512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPT Balance App</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <div id="notification" class="notification hidden"></div>
+  <div class="balance-section">
+    <p>Ваш баланс</p>
+    <div class="balance-amount">SPT 0.0</div>
+  </div>
+
+  <label class="calories-label" for="calories-input">Количество</label>
+  <div class="calories-section">
+    <div class="calories-input-wrapper">
+      <input class="calories-input" id="calories-input" type="text" value="" autocomplete="off">
+      <span class="spt-value" id="show-output">SPT -</span>
+    </div>
+    <button class="reset-btn" id="reset">×</button>
+    <div class="input-line"></div>
+  </div>
+
+  <!-- Кнопки -->
+  <div class="buttons">
+    <button class="button add-btn">
+      <img src="assets/received.svg" alt="Добавить">
+      Добавить
+    </button>
+    <button class="button spend-btn">
+      <img src="assets/send.svg" alt="Потратить">
+      Потратить
+    </button>
+  </div>
+    <div class="menu-btn">
+    <button class="button menu-list-btn" onclick="window.location.href='product_list.html'">
+      <img src="assets/menu.svg" alt="Меню">
+      Список продуктов
+    </button>
+  </div>
+
+  <!-- История баланса -->
+  <div class="history-section-wrapper scrollable">
+    <div class="history-section">
+      <h3>История баланса</h3>
+    </div>
+  </div>
+</div>
+</body>
+</html>

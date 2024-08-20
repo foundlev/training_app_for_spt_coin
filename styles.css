@@ -1,0 +1,452 @@
+@font-face {
+  font-family: 'ArianaPro';
+  src: url('assets/ArianaProRegular.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'ArianaPro';
+  src: url('assets/ArianaProMedium.ttf') format('truetype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'ArianaPro';
+  src: url('assets/ArianaProBold.ttf') format('truetype');
+  font-weight: bold;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'ArianaPro', sans-serif;
+  background-color: #F6F6F6;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212;
+    color: #E0E0E0;
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 420px;
+  padding: 24px;
+}
+
+.balance-section {
+  text-align: left;
+  margin-bottom: 32px;
+}
+
+.balance-section p {
+  font-size: 16px;
+  color: #B0B0B0;
+  font-weight: normal;
+  margin-bottom: 4px;
+}
+
+.balance-amount {
+  font-family: 'ArianaPro', sans-serif;
+  font-weight: bold;
+  font-size: 36px;
+  color: #333;
+}
+
+@media (prefers-color-scheme: dark) {
+  .balance-section p {
+    color: #888;
+  }
+
+  .balance-amount {
+    color: #E0E0E0;
+  }
+}
+
+.calories-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
+  position: relative;
+}
+
+.calories-input-wrapper {
+  display: flex;
+  align-items: baseline;
+  width: 100%;
+}
+
+.calories-input {
+  font-size: 28px;
+  font-weight: bold;
+  border: none;
+  outline: none;
+  width: 65%;
+  background-color: #F6F6F6;
+  color: #333;
+}
+
+@media (prefers-color-scheme: dark) {
+  .calories-input {
+    background-color: #121212;
+    color: #E0E0E0;
+  }
+}
+
+.spt-value {
+  font-size: 14px;
+  color: #888;
+  margin-left: 8px;
+  white-space: nowrap;
+  font-weight: normal;
+}
+
+.reset-btn {
+  font-size: 36px;
+  color: #888;
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@media (prefers-color-scheme: dark) {
+  .calories-section {
+    border-bottom: 1px solid #333;
+  }
+
+  .spt-value, .reset-btn {
+    color: #888;
+  }
+}
+
+.calories-label {
+  font-size: 14px;
+  color: #B0B0B0;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.input-line {
+  height: 1px;
+  background-color: #ddd;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .input-line {
+    background-color: #333;
+  }
+
+  .calories-label {
+    color: #888;
+  }
+}
+
+/* Кнопки */
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 0;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 16px;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  width: 48%;
+}
+
+.button img {
+  margin-right: 8px;
+}
+
+.add-btn {
+  background-color: #63C477;
+  color: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+  .add-btn {
+    background-color: #36A15C;
+    color: #fff;
+  }
+}
+
+.spend-btn {
+  background-color: #2C2C2C;
+  color: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+  .spend-btn {
+    background-color: #99a19d;
+    color: #fff;
+  }
+}
+
+.menu-btn {
+  width: 100%;
+  margin-top: 16px;
+  margin-bottom: 32px;
+}
+
+.menu-list-btn {
+  width: 100%;
+  background-color: #7C7CFF;
+  color: white;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 0;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+}
+
+.menu-list-btn img {
+  margin-right: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .menu-list-btn {
+    background-color: #4242FF;
+    color: #fff;
+  }
+}
+
+/* История баланса */
+.history-section-wrapper {
+  background-color: #fff;
+  padding: 16px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  width: 100vw;
+  height: 55%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.history-section h3 {
+  font-size: 18px;
+  margin-bottom: 16px;
+  font-weight: bold;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.history-item:last-child {
+  margin-bottom: 0;
+}
+
+.history-left {
+  display: flex;
+  align-items: center;
+}
+
+.history-left img {
+  width: 36px;
+  height: 36px;
+  margin-right: 12px;
+}
+
+.history-text {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.history-text-small {
+  font-size: 16px;
+  color: #888;
+  font-weight: normal;
+}
+
+.history-status-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.history-status {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.history-label {
+  font-size: 14px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  color: white;
+  text-align: center;
+}
+
+/* Стили для дневной темы */
+.positive {
+    background-color: #63C477;
+}
+
+.negative {
+    background-color: #FF6C6C;
+}
+
+.scrollable {
+  overflow-y: auto;
+}
+
+.product-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.product-list li {
+    font-size: 18px;
+    margin-bottom: 12px;
+    font-family: 'ArianaPro', sans-serif;
+}
+
+.back-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 16px;
+    background-color: #7C7CFF;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    margin-bottom: 24px;
+    transition: background-color 0.3s ease;
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 48px); /* Ширина с учётом отступов */
+}
+
+.back-button img {
+    margin-right: 8px;
+    width: 24px;
+    height: 24px;
+}
+
+.back-button:hover {
+    background-color: #6A6AFF;
+}
+
+.notification {
+    position: absolute;
+    top: 8.2%; /* Позиционируем по центру родителя */
+    right: -200px; /* Начальная позиция за пределами экрана */
+    background-color: #63C477;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: opacity 0.5s ease, right 0.5s ease;
+    z-index: 1000;
+    transform: translateY(-50%); /* Остается на том же уровне, что и элемент */
+}
+
+.notification-spend {
+    background-color: #FF6C6C;
+}
+
+.notification.show {
+    opacity: 1;
+    right: 2%;
+    width: 34%;
+}
+
+.notification.hidden {
+    display: none;
+}
+
+.history-date {
+    font-size: 12px;
+    color: #888;
+    margin-top: 4px;
+}
+
+.empty-history-message {
+    text-align: center;
+    font-size: 18px;
+    color: #888;
+    margin-top: 20px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .history-section-wrapper {
+    background-color: #1E1E1E;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.7);
+  }
+
+  .history-text-small {
+    color: #888;
+  }
+
+  .history-status {
+    color: #E0E0E0;
+  }
+
+    .back-button {
+        background-color: #4242FF;
+    }
+
+    .back-button:hover {
+        background-color: #3A3AFF;
+    }
+
+    .positive {
+        background-color: #4CAF50; /* Темно-зелёный для ночной темы */
+    }
+
+    .negative {
+        background-color: #E57373; /* Темно-красный для ночной темы */
+    }
+}
