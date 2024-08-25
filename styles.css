@@ -420,6 +420,93 @@ body {
     margin-top: 20px;
 }
 
+.alert-window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%; /* Сделать алерт шире */
+    max-width: 400px; /* Ограничить максимальную ширину */
+}
+
+.alert-content p {
+    font-size: 18px;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.alert-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.alert-btn {
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background-color: #F0F0F0; /* Светло-серый фон для кнопок */
+    color: #333;
+    transition: background-color 0.3s ease;
+}
+
+.alert-btn:hover {
+    background-color: #E0E0E0; /* Темнее при наведении */
+}
+
+.alert-btn:last-child {
+    background-color: #D0D0D0; /* Более тёмный серый для кнопки отмены */
+    color: #333;
+}
+
+.alert-btn:last-child:hover {
+    background-color: #C0C0C0;
+}
+
+.hidden {
+    display: none;
+}
+
+.alert-window.show {
+    display: flex;
+}
+
+@media (prefers-color-scheme: dark) {
+    .alert-window {
+        background-color: #2C2C2C; /* Темный фон для алерта */
+        color: #E0E0E0; /* Светлый текст для алерта */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Темный тень */
+    }
+
+    .alert-btn {
+        background-color: #444; /* Темные кнопки */
+        color: #E0E0E0;
+    }
+
+    .alert-btn:hover {
+        background-color: #555; /* Более светлый цвет при наведении */
+    }
+
+    .alert-btn:last-child {
+        background-color: #666; /* Более темный фон для кнопки отмены */
+        color: #E0E0E0;
+    }
+
+    .alert-btn:last-child:hover {
+        background-color: #777; /* Светлее при наведении */
+    }
+}
+
 @media (prefers-color-scheme: dark) {
   .history-section-wrapper {
     background-color: #1E1E1E;

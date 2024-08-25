@@ -1,8 +1,84 @@
+let selectedHistoryItem = null;
+
+// Обновление отображаемого баланса
+function updateBalanceDisplay() {
+    const balanceElement = document.querySelector('.balance-amount');
+    const history = JSON.parse(localStorage.getItem('history')) || [];
+    let balance = 0.0;
+
+    history.forEach(entry => {
+        if (entry.action === 'Тренировка') {
+            balance += parseFloat(entry.spt);
+        } else if (entry.action === 'Вкусное') {
+            balance -= parseFloat(entry.spt);
+        }
+    });
+
+    balanceElement.textContent = `SPT ${parseFloat(balance).toFixed(2)}`;
+    if (balance > 0) {
+        balanceElement.style.color = '#66BB6A'; // Зеленый цвет для положительного баланса
+    } else if (balance < 0) {
+        balanceElement.style.color = '#F06260'; // Красный цвет для отрицательного баланса
+    } else {
+        balanceElement.style.color = ''; // Черный цвет для нулевого баланса
+    }
+}
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    const alertWindow = document.getElementById('alert-window');
+    const alertMessage = document.getElementById('alert-message');
+    const confirmDeleteButton = document.getElementById('confirm-delete');
+    const cancelDeleteButton = document.getElementById('cancel-delete');
+
+    // Функция для показа алерта с информацией
+    function showAlert(historyItem) {
+        selectedHistoryItem = historyItem;
+        const action = historyItem.querySelector('.history-text').textContent;
+        const calories = historyItem.querySelector('.history-text-small').textContent;
+        const spt = historyItem.querySelector('.history-status').textContent;
+        alertMessage.textContent = `Удалить запись: ${action} (${calories}, ${spt})?`;
+        alertWindow.classList.remove('hidden');
+        alertWindow.classList.add('show');
+    }
+
+    // Функция для скрытия алерта
+    function hideAlert() {
+        alertWindow.classList.remove('show');
+        alertWindow.classList.add('hidden');
+    }
+
+    // Подтверждение удаления элемента истории
+    confirmDeleteButton.addEventListener('click', function() {
+        if (selectedHistoryItem) {
+            const history = JSON.parse(localStorage.getItem('history')) || [];
+            const index = Array.from(document.querySelectorAll('.history-item')).indexOf(selectedHistoryItem);
+            if (index > -1) {
+                history.splice(history.length - 1 - index, 1); // Удаляем элемент из истории
+                localStorage.setItem('history', JSON.stringify(history));
+                selectedHistoryItem.remove(); // Удаляем элемент из DOM
+                hideAlert(); // Скрываем алерт
+                updateBalanceDisplay();
+            }
+        }
+    });
+
+    // Отмена удаления
+    cancelDeleteButton.addEventListener('click', hideAlert);
+
+    // Добавляем обработчики на элементы истории
+    document.querySelector('.history-section').addEventListener('click', function(event) {
+        const historyItem = event.target.closest('.history-item');
+        if (historyItem) {
+            showAlert(historyItem); // Показываем алерт с информацией
+        }
+    });
+});
+
 document.addEventListener("DOMContentLoaded", function() {
     const caloriesInput = document.getElementById('calories-input');
     const caloriesResetButton = document.getElementById('reset');
     const outputLabel = document.getElementById('show-output');
-    const balanceElement = document.querySelector('.balance-amount');
 
     const exchangeRateToSPT = 0.85182;
     const balanceSection = document.querySelector('.balance-section');
@@ -11,9 +87,7 @@ document.addEventListener("DOMContentLoaded", function() {
     notification.classList.add('notification', 'hidden');
     balanceSection.appendChild(notification);  // Добавляем уведомление в раздел баланса
 
-    // Инициализация баланса из Local Storage
-    let balance = parseFloat(localStorage.getItem('balance')) || 0.0;
-    updateBalanceDisplay(balance);
+    updateBalanceDisplay();
     renderHistory();
 
     function showNotification(message, spend) {
@@ -102,30 +176,18 @@ document.addEventListener("DOMContentLoaded", function() {
         outputLabel.textContent = `SPT -`;
     });
 
-    // Обновление отображаемого баланса
-    function updateBalanceDisplay(balance) {
-        balanceElement.textContent = `SPT ${parseFloat(balance).toFixed(2)}`;
-        if (balance < 0) {
-            balanceElement.style.color = 'red';
-        } else {
-            balanceElement.style.color = '';
-        }
-    }
-
     // Обработка добавления калорий к балансу
     document.querySelector('.add-btn').addEventListener('click', function() {
         let calories = parseFloat(caloriesInput.value.replace(/\D/g, ''));
         if (!isNaN(calories)) {
             let spt = convertToSPT(calories);
-            balance = parseFloat(balance) + parseFloat(spt);
-            localStorage.setItem('balance', balance);
             caloriesInput.value = '';
             outputLabel.textContent = `SPT -`;
-            updateBalanceDisplay(balance);
             showNotification(`+ SPT ${spt}`, false);
 
             // Сохраняем запись в истории
             saveHistoryEntry('Тренировка', calories, spt);
+            updateBalanceDisplay();
         }
     });
 
@@ -134,15 +196,13 @@ document.addEventListener("DOMContentLoaded", function() {
         let calories = parseFloat(caloriesInput.value.replace(/\D/g, ''));
         if (!isNaN(calories)) {
             let spt = convertToSPT(calories);
-            balance = parseFloat(balance) - parseFloat(spt);
-            localStorage.setItem('balance', balance);
             caloriesInput.value = '';
             outputLabel.textContent = `SPT -`;
-            updateBalanceDisplay(balance);
             showNotification(`- SPT ${spt}`, true);
 
             // Сохраняем запись в истории
             saveHistoryEntry('Вкусное', calories, spt);
+            updateBalanceDisplay();
         }
     });
 
