@@ -195,7 +195,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Если поле пустое, оставляем его пустым, чтобы кнопка удаления работала корректно
         if (value.length === 0) {
-            inputField.value = '';
+            inputField.value = ' ';
         } else {
             inputField.value = `${value} ккал`; // добавляем маску
         }
@@ -206,7 +206,7 @@ document.addEventListener("DOMContentLoaded", function() {
         let value = inputField.value.replace(/\D/g, ''); // удаляем все нецифровые символы
         if (value.length > 0) {
             value = value.slice(0, -1); // удаляем последнюю цифру
-            inputField.value = value.length === 0 ? '' : `${value} ккал`;
+            inputField.value = value.length === 0 ? ' ' : `${value} ккал`;
             outputLabel.textContent = `SPT ${convertToSPT(value, true)}`;
         } else {
             outputLabel.textContent = `SPT -`;
