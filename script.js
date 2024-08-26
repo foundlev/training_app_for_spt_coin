@@ -265,3 +265,20 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
 });
+
+window.addEventListener('resize', function() {
+    const container = document.querySelector('.container');
+    const historySection = document.querySelector('.history-section-wrapper.scrollable');
+    const containerBottom = container.getBoundingClientRect().bottom;
+    const availableHeight = window.innerHeight - containerBottom;
+
+    if (availableHeight < 120) {  // Минимальная высота для отображения истории
+        historySection.style.display = 'none';
+    } else {
+        historySection.style.display = 'block';
+        historySection.style.height = `${availableHeight}px`;
+    }
+});
+
+// Инициализация при загрузке страницы
+window.dispatchEvent(new Event('resize'));

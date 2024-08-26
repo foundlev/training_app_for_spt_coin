@@ -35,15 +35,9 @@ body {
 
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: #121212;
+    background-color: #212121;
     color: #E0E0E0;
   }
-}
-
-.container {
-  width: 100%;
-  max-width: 420px;
-  padding: 24px;
 }
 
 .balance-section {
@@ -103,7 +97,7 @@ body {
 
 @media (prefers-color-scheme: dark) {
   .calories-input {
-    background-color: #121212;
+    background-color: #212121;
     color: #E0E0E0;
   }
 }
@@ -479,6 +473,31 @@ body {
 
 .alert-window.show {
     display: flex;
+}
+
+/* Устанавливаем относительное позиционирование для контейнера */
+.container {
+    width: 100%;
+    max-width: 420px;
+    padding: 24px;
+    box-sizing: border-box;
+    position: relative; /* Позиционируем контейнер относительно страницы */
+    margin-bottom: 32px; /* Отступ для корректного расчета */
+}
+
+/* История фиксированно на 32px ниже контейнера */
+.history-section-wrapper.scrollable {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    overflow-y: auto;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+    padding-top: 32px;
+    height: auto; /* Высота устанавливается динамически через JS */
 }
 
 @media (prefers-color-scheme: dark) {
