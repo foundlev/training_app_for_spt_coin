@@ -441,6 +441,7 @@ body {
 }
 
 .back-button {
+    color: #333;
     position: fixed;
     bottom: 24px;
     left: 50%;
