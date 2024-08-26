@@ -1,4 +1,5 @@
 let selectedHistoryItem = null;
+let keyboardShow = false;
 
 // Обновление отображаемого баланса
 function updateBalanceDisplay() {
@@ -23,7 +24,6 @@ function updateBalanceDisplay() {
         balanceElement.style.color = ''; // Черный цвет для нулевого баланса
     }
 }
-
 
 document.addEventListener("DOMContentLoaded", function() {
     const alertWindow = document.getElementById('alert-window');
@@ -76,9 +76,50 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 document.addEventListener("DOMContentLoaded", function() {
+    const caloriesSection = document.querySelector('.calories-section');
+    const hideKeyboardButton = document.getElementById('hide-keyboard-button');
+
+    function toggleKeyboard() {
+        const historySection = document.getElementById('history-section').parentElement;
+        const keyboardSection = document.getElementById('keyboard-section');
+
+        if (keyboardShow) {
+            historySection.style.display = '';  // Удаляем инлайновый стиль
+            historySection.classList.add('hidden');  // Скрываем историю
+            keyboardSection.classList.remove('hidden');  // Показываем клавиатуру
+        } else {
+            keyboardSection.style.display = '';  // Удаляем инлайновый стиль с клавиатуры
+            historySection.classList.remove('hidden');  // Показываем историю
+            keyboardSection.classList.add('hidden');  // Скрываем клавиатуру
+        }
+    }
+
+    function showKeyboard() {
+        hideNotification();
+        keyboardShow = true;
+        toggleKeyboard();
+    }
+
+    function hideKeyboard() {
+        keyboardShow = false;
+        toggleKeyboard();
+    }
+
+    caloriesSection.addEventListener('click', function() {
+        showKeyboard(); // Отображаем кастомную клавиатуру
+    });
+
+    hideKeyboardButton.addEventListener('click', function() {
+        hideKeyboard(); // Скрываем кастомную клавиатуру по нажатию на кнопку "Назад"
+    });
+
     const caloriesInput = document.getElementById('calories-input');
     const caloriesResetButton = document.getElementById('reset');
     const outputLabel = document.getElementById('show-output');
+
+    const keys = document.querySelectorAll('.key[data-digit]');
+    const deleteKey = document.getElementById('delete-key');
+    const inputField = document.getElementById('calories-input');
 
     const exchangeRateToSPT = 0.85182;
     const balanceSection = document.querySelector('.balance-section');
@@ -89,6 +130,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
     updateBalanceDisplay();
     renderHistory();
+
+    function hideNotification() {
+        notification.classList.remove('show');
+        notification.classList.remove('notification-spend');
+        notification.classList.add('hidden');
+    }
 
     function showNotification(message, spend) {
         notification.textContent = message;
@@ -134,8 +181,9 @@ document.addEventListener("DOMContentLoaded", function() {
         return result;
     }
 
-    caloriesInput.addEventListener('input', function (e) {
-        let value = e.target.value.replace(/\D/g, ''); // удаляем все нецифровые символы
+    function inputDigit(digit) {
+        let value = inputField.value.replace(/\D/g, ''); // удаляем все нецифровые символы
+        value += digit.toString();
         const previousLength = value.length;
 
         // Ограничиваем ввод чисел от 1 до 999
@@ -147,29 +195,23 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Если поле пустое, оставляем его пустым, чтобы кнопка удаления работала корректно
         if (value.length === 0) {
-            e.target.value = '';
+            inputField.value = '';
         } else {
-            e.target.value = `${value} ккал`; // добавляем маску
+            inputField.value = `${value} ккал`; // добавляем маску
         }
         outputLabel.textContent = `SPT ${convertToSPT(value, true)}`;
+    }
 
-        // Перемещаем курсор на правильную позицию
-        if (previousLength > value.length) {
-            e.target.setSelectionRange(value.length, value.length); // курсор ставится сразу после последней цифры
+    function deleteDigit() {
+        let value = inputField.value.replace(/\D/g, ''); // удаляем все нецифровые символы
+        if (value.length > 0) {
+            value = value.slice(0, -1); // удаляем последнюю цифру
+            inputField.value = value.length === 0 ? '' : `${value} ккал`;
+            outputLabel.textContent = `SPT ${convertToSPT(value, true)}`;
+        } else {
+            outputLabel.textContent = `SPT -`;
         }
-    });
-
-    caloriesInput.addEventListener('keydown', function (e) {
-        if (e.key === 'Backspace') {
-            let value = e.target.value.replace(/\D/g, ''); // удаляем все нецифровые символы
-            if (value.length > 0) {
-                value = value.slice(0, -1); // удаляем последнюю цифру
-                e.target.value = value.length === 0 ? '' : `${value} ккал`;
-                e.preventDefault(); // предотвращаем стандартное поведение backspace
-                outputLabel.textContent = `SPT ${convertToSPT(value, true)}`;
-            }
-        }
-    });
+    }
 
     caloriesResetButton.addEventListener('click', function() {
         caloriesInput.value = '';
@@ -188,6 +230,7 @@ document.addEventListener("DOMContentLoaded", function() {
             // Сохраняем запись в истории
             saveHistoryEntry('Тренировка', calories, spt);
             updateBalanceDisplay();
+            hideKeyboard();
         }
     });
 
@@ -203,6 +246,7 @@ document.addEventListener("DOMContentLoaded", function() {
             // Сохраняем запись в истории
             saveHistoryEntry('Вкусное', calories, spt);
             updateBalanceDisplay();
+            hideKeyboard();
         }
     });
 
@@ -264,9 +308,25 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    // Добавляем обработчики событий на все кнопки с цифрами
+    keys.forEach(key => {
+        key.addEventListener('click', function() {
+            const digit = key.getAttribute('data-digit');
+            inputDigit(digit); // Вызываем inputDigit с соответствующей цифрой
+        });
+    });
+
+    // Обработчик для кнопки удаления
+    deleteKey.addEventListener('click', function() {
+        deleteDigit(); // Вызываем deleteDigit при нажатии на кнопку удаления
+    });
 });
 
 window.addEventListener('resize', function() {
+    if (keyboardShow) {
+        return;
+    }
+
     const container = document.querySelector('.container');
     const historySection = document.querySelector('.history-section-wrapper.scrollable');
     const containerBottom = container.getBoundingClientRect().bottom;

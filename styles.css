@@ -33,12 +33,6 @@ body {
   padding: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #212121;
-    color: #E0E0E0;
-  }
-}
 
 .balance-section {
   text-align: left;
@@ -59,15 +53,6 @@ body {
   color: #333;
 }
 
-@media (prefers-color-scheme: dark) {
-  .balance-section p {
-    color: #888;
-  }
-
-  .balance-amount {
-    color: #E0E0E0;
-  }
-}
 
 .calories-section {
   display: flex;
@@ -95,15 +80,9 @@ body {
   color: #333;
 }
 
-@media (prefers-color-scheme: dark) {
-  .calories-input {
-    background-color: #212121;
-    color: #E0E0E0;
-  }
-}
 
 .spt-value {
-  font-size: 14px;
+  font-size: 16px;
   color: #888;
   margin-left: 8px;
   white-space: nowrap;
@@ -122,16 +101,6 @@ body {
   transform: translateY(-50%);
 }
 
-@media (prefers-color-scheme: dark) {
-  .calories-section {
-    border-bottom: 1px solid #333;
-  }
-
-  .spt-value, .reset-btn {
-    color: #888;
-  }
-}
-
 .calories-label {
   font-size: 14px;
   color: #B0B0B0;
@@ -146,16 +115,6 @@ body {
   position: absolute;
   bottom: 0;
   left: 0;
-}
-
-@media (prefers-color-scheme: dark) {
-  .input-line {
-    background-color: #333;
-  }
-
-  .calories-label {
-    color: #888;
-  }
 }
 
 /* Кнопки */
@@ -188,23 +147,9 @@ body {
   color: #fff;
 }
 
-@media (prefers-color-scheme: dark) {
-  .add-btn {
-    background-color: #36A15C;
-    color: #fff;
-  }
-}
-
 .spend-btn {
   background-color: #2C2C2C;
   color: #fff;
-}
-
-@media (prefers-color-scheme: dark) {
-  .spend-btn {
-    background-color: #99a19d;
-    color: #fff;
-  }
 }
 
 .menu-btn {
@@ -230,13 +175,6 @@ body {
 
 .menu-list-btn img {
   margin-right: 8px;
-}
-
-@media (prefers-color-scheme: dark) {
-  .menu-list-btn {
-    background-color: #4242FF;
-    color: #fff;
-  }
 }
 
 /* История баланса */
@@ -337,42 +275,15 @@ body {
     font-family: 'ArianaPro', sans-serif;
 }
 
-.back-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 16px;
-    background-color: #7C7CFF;
-    color: white;
-    font-size: 18px;
-    font-weight: 500;
-    border-radius: 12px;
-    border: none;
-    cursor: pointer;
-    text-align: center;
-    margin-bottom: 24px;
-    transition: background-color 0.3s ease;
-    position: fixed;
-    bottom: 24px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: calc(100% - 48px); /* Ширина с учётом отступов */
-}
-
 .back-button img {
     margin-right: 8px;
     width: 24px;
     height: 24px;
 }
 
-.back-button:hover {
-    background-color: #6A6AFF;
-}
-
 .notification {
     position: absolute;
     top: 8.2%; /* Позиционируем по центру родителя */
-    right: -200px; /* Начальная позиция за пределами экрана */
     background-color: #63C477;
     color: white;
     padding: 12px 20px;
@@ -382,9 +293,11 @@ body {
     text-align: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     opacity: 0;
-    transition: opacity 0.5s ease, right 0.5s ease;
+    transition: opacity 0.5s ease;
     z-index: 1000;
-    transform: translateY(-50%); /* Остается на том же уровне, что и элемент */
+    transform: translateY(37%); /* Остается на том же уровне, что и элемент */
+    right: 2%;
+    width: 34%;
 }
 
 .notification-spend {
@@ -393,8 +306,6 @@ body {
 
 .notification.show {
     opacity: 1;
-    right: 2%;
-    width: 34%;
 }
 
 .notification.hidden {
@@ -454,17 +365,9 @@ body {
     transition: background-color 0.3s ease;
 }
 
-.alert-btn:hover {
-    background-color: #E0E0E0; /* Темнее при наведении */
-}
-
 .alert-btn:last-child {
     background-color: #D0D0D0; /* Более тёмный серый для кнопки отмены */
     color: #333;
-}
-
-.alert-btn:last-child:hover {
-    background-color: #C0C0C0;
 }
 
 .hidden {
@@ -500,7 +403,140 @@ body {
     height: auto; /* Высота устанавливается динамически через JS */
 }
 
+/* Стили для секции клавиатуры */
+.keyboard-section {
+    bottom: 0;
+    width: 100%;
+}
+
+.numeric-keypad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Сетка 3 колонки */
+    gap: 12px;
+    width: 100%; /* Растягиваем на всю ширину контейнера */
+    max-width: 400px; /* Устанавливаем максимальную ширину */
+    margin: 0 auto; /* Центрируем блок клавиатуры */
+    margin-bottom: 16px;
+}
+
+.key {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    padding: 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: center; /* Центрируем текст внутри кнопок */
+}
+
+.key img {
+    width: 28px;
+    height: 28px;
+}
+
+.key img #reset {
+    width: 34px;
+    height: 34px;
+}
+
+.back-button {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 20px;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    width: 90%;
+    max-width: 420px;
+    background: #F6F6F6;
+    border: 1px solid rgba(22, 20, 20, 0.6); /* Обводка с 60% прозрачностью */
+}
+
+
+.hidden {
+    display: none;
+}
+
+.delete-light, .back-light, .reset-light {
+    display: block;
+}
+
+.delete-dark, .back-dark, .reset-dark {
+    display: none;
+}
+
+/* В темной теме меняем видимость */
 @media (prefers-color-scheme: dark) {
+  body {
+    background-color: #212121;
+    color: #E0E0E0;
+  }
+
+  .balance-section p {
+    color: #888;
+  }
+
+  .balance-amount {
+    color: #E0E0E0;
+  }
+
+  .calories-input {
+    background-color: #212121;
+    color: #E0E0E0;
+  }
+
+  .calories-section {
+    border-bottom: 1px solid #333;
+  }
+
+  .spt-value, .reset-btn {
+    color: #888;
+  }
+
+  .input-line {
+    background-color: #333;
+  }
+
+  .calories-label {
+    color: #888;
+  }
+
+  .spend-btn {
+    background-color: #424242;
+    color: #E0E0E0;
+  }
+
+  .add-btn {
+    background-color: #277847;
+    color: #E0E0E0;
+  }
+
+  .menu-list-btn {
+    background-color: #5D4AB7;
+    color: #E0E0E0;
+  }
+
+    .delete-light, .back-light, .reset-light {
+        display: none;
+    }
+
+    .delete-dark, .back-dark, .reset-dark {
+        display: block;
+    }
+
+    .history-section-wrapper.scrollable {
+        background: #212121;
+    }
+
     .alert-window {
         background-color: #2C2C2C; /* Темный фон для алерта */
         color: #E0E0E0; /* Светлый текст для алерта */
@@ -512,40 +548,28 @@ body {
         color: #E0E0E0;
     }
 
-    .alert-btn:hover {
-        background-color: #555; /* Более светлый цвет при наведении */
-    }
-
     .alert-btn:last-child {
         background-color: #666; /* Более темный фон для кнопки отмены */
         color: #E0E0E0;
     }
 
-    .alert-btn:last-child:hover {
-        background-color: #777; /* Светлее при наведении */
+    .history-section-wrapper {
+        background-color: #1E1E1E;
+        box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.7);
     }
-}
 
-@media (prefers-color-scheme: dark) {
-  .history-section-wrapper {
-    background-color: #1E1E1E;
-    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.7);
-  }
+    .history-text-small {
+        color: #888;
+    }
 
-  .history-text-small {
-    color: #888;
-  }
-
-  .history-status {
-    color: #E0E0E0;
-  }
+    .history-status {
+        color: #E0E0E0;
+    }
 
     .back-button {
-        background-color: #4242FF;
-    }
-
-    .back-button:hover {
-        background-color: #3A3AFF;
+        background-color: #212121;
+        color: #E0E0E0;
+        border: 1px solid rgba(224, 224, 224, 0.6); /* Обводка с 60% прозрачностью */
     }
 
     .positive {
