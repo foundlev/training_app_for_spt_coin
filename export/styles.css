@@ -1,0 +1,162 @@
+@font-face {
+  font-family: 'ArianaPro';
+  src: url('../assets/ArianaProRegular.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'ArianaPro';
+  src: url('../assets/ArianaProMedium.ttf') format('truetype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'ArianaPro';
+  src: url('../assets/ArianaProBold.ttf') format('truetype');
+  font-weight: bold;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'ArianaPro', sans-serif;
+  background-color: #F6F6F6;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212;
+    color: #E0E0E0;
+  }
+}
+
+/* Основной контейнер */
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+/* Заголовок */
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+/* Контейнер для текстового поля */
+.note-container {
+    flex-grow: 1;
+}
+
+/* Стили для текстового поля */
+.note-textarea {
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+    font-size: 12px;
+    font-family: 'ArianaPro', sans-serif;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #333;
+    resize: none;
+    outline: none;
+    box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: dark) {
+    .note-textarea {
+        background-color: #1E1E1E;
+        color: #E0E0E0;
+        border: 1px solid #444;
+    }
+}
+
+/* Стили для кнопок Загрузить и Сохранить */
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 16px 0;
+}
+
+.load-button, .save-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 20px;
+    background-color: #9BA4B5;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    width: 48%; /* Одинаковая ширина для обеих кнопок */
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.load-button img, .save-button img {
+    margin-right: 8px;
+    width: 24px;
+    height: 24px;
+}
+
+.back-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 20px;
+    background-color: #7C7CFF;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+}
+
+.back-button img {
+    margin-right: 8px;
+    width: 24px;
+    height: 24px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .back-button {
+        background-color: #3030B3;
+    }
+}
+
+/* Стили для ночной темы */
+@media (prefers-color-scheme: dark) {
+    .container {
+        background-color: #121212;
+        color: #E0E0E0;
+    }
+
+    h1 {
+        color: #E0E0E0;
+    }
+
+    .load-button, .save-button {
+        background-color: #5A6378;
+    }
+}

@@ -462,16 +462,22 @@ body {
     border: 1px solid rgba(22, 20, 20, 0.6); /* Обводка с 60% прозрачностью */
 }
 
+#export-button {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+}
+
 
 .hidden {
     display: none;
 }
 
-.delete-light, .back-light, .reset-light {
+.delete-light, .back-light, .reset-light, .export-light {
     display: block;
 }
 
-.delete-dark, .back-dark, .reset-dark {
+.delete-dark, .back-dark, .reset-dark, .export-dark {
     display: none;
 }
 
@@ -526,11 +532,11 @@ body {
     color: #E0E0E0;
   }
 
-    .delete-light, .back-light, .reset-light {
+    .delete-light, .back-light, .reset-light, .export-light {
         display: none;
     }
 
-    .delete-dark, .back-dark, .reset-dark {
+    .delete-dark, .back-dark, .reset-dark, .export-dark {
         display: block;
     }
 

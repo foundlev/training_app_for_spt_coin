@@ -9,16 +9,23 @@
   <meta name="theme-color" content="#ffffff">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="icon" href="icons/image_64.png" sizes="64x64" type="image/png">
+  <link rel="icon" href="icons/image_128.png" sizes="128x128" type="image/png">
   <link rel="apple-touch-icon" href="icons/logo.png">
 </head>
 <body>
 
 <div class="container">
-  <div id="notification" class="notification hidden"></div>
-  <div class="balance-section">
-    <p>Ваш баланс</p>
-    <div class="balance-amount">SPT 0.0</div>
-  </div>
+    <div id="notification" class="notification hidden"></div>
+    <div class="balance-section">
+        <p>Ваш баланс</p>
+        <div class="balance-amount">SPT 0.0</div>
+    </div>
+
+    <div id="export-button">
+        <img src="assets/export.svg" class="export-light" alt="Экспорт" onclick="window.location.href='export/index.html'">
+        <img src="assets/export_white.svg" class="export-dark" alt="Экспорт" onclick="window.location.href='export/index.html'">
+    </div>
 
   <label class="calories-label" for="calories-input">Количество</label>
   <div class="calories-section">
@@ -42,7 +49,7 @@
     </button>
   </div>
     <div class="menu-btn">
-    <button class="button menu-list-btn" onclick="window.location.href='product_list.html'">
+    <button class="button menu-list-btn" onclick="window.location.href='products/index.html'">
       <img src="assets/menu.svg" alt="Меню">
       Список продуктов
     </button>
@@ -85,7 +92,6 @@
 </div>
 
 </div>
-<script src="script.js"></script>
 <div id="alert-window" class="alert-window hidden">
     <div class="alert-content">
         <p id="alert-message"></p>
@@ -95,5 +101,6 @@
         </div>
     </div>
 </div>
+<script src="script.js"></script>
 </body>
 </html>

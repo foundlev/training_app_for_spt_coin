@@ -214,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     caloriesResetButton.addEventListener('click', function() {
-        caloriesInput.value = '';
+        caloriesInput.value = ' ';
         outputLabel.textContent = `SPT -`;
     });
 
@@ -223,7 +223,7 @@ document.addEventListener("DOMContentLoaded", function() {
         let calories = parseFloat(caloriesInput.value.replace(/\D/g, ''));
         if (!isNaN(calories)) {
             let spt = convertToSPT(calories);
-            caloriesInput.value = '';
+            caloriesInput.value = ' ';
             outputLabel.textContent = `SPT -`;
             showNotification(`+ SPT ${spt}`, false);
 
@@ -239,7 +239,7 @@ document.addEventListener("DOMContentLoaded", function() {
         let calories = parseFloat(caloriesInput.value.replace(/\D/g, ''));
         if (!isNaN(calories)) {
             let spt = convertToSPT(calories);
-            caloriesInput.value = '';
+            caloriesInput.value = ' ';
             outputLabel.textContent = `SPT -`;
             showNotification(`- SPT ${spt}`, true);
 

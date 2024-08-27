@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training SPT - Данные</title>
+    <link rel="stylesheet" href="styles.css">
+<!--    <link rel="manifest" href="manifest.json">-->
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="icon" href="../icons/image_64.png" sizes="64x64" type="image/png">
+    <link rel="icon" href="../icons/image_128.png" sizes="128x128" type="image/png">
+    <link rel="apple-touch-icon" href="../icons/logo.png">
+</head>
+<body>
+    <div class="container">
+        <h1>Управление данными</h1>
+
+        <!-- Текстовое поле для данных -->
+        <div class="note-container">
+            <textarea class="note-textarea" id="export-area" placeholder=""></textarea>
+        </div>
+
+        <!-- Блок для загрузки и сохранения -->
+        <div class="action-buttons">
+            <button class="load-button" onclick="loadData()">
+                <img src="../assets/load.svg" alt="Загрузить">
+                Загрузить
+            </button>
+            <button class="save-button" onclick="saveData()">
+                <img src="../assets/save.svg" alt="Сохранить">
+                Сохранить
+            </button>
+        </div>
+
+        <!-- Кнопка назад -->
+        <div class="back-button-wrapper">
+            <button class="back-button" onclick="window.history.back()">
+                <img src="../assets/back.svg" alt="Назад">
+                Назад
+            </button>
+        </div>
+    </div>
+
+<script src="script.js"></script>
+</body>
+</html>

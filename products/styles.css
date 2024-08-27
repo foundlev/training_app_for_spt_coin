@@ -1,12 +1,63 @@
-/* Стиль для общей страницы */
+@font-face {
+  font-family: 'ArianaPro';
+  src: url('assets/ArianaProRegular.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'ArianaPro';
+  src: url('assets/ArianaProMedium.ttf') format('truetype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'ArianaPro';
+  src: url('assets/ArianaProBold.ttf') format('truetype');
+  font-weight: bold;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'ArianaPro', sans-serif;
+  background-color: #F6F6F6;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212;
+    color: #E0E0E0;
+  }
+}
+
+/* Основной контейнер */
 .container {
     display: flex;
     flex-direction: column;
-    padding: 24px;
     height: 100vh;
+    padding: 24px;
     box-sizing: border-box;
+    justify-content: space-between; /* Для распределения пространства */
 }
 
+/* Контейнер для списка продуктов с ограниченной высотой */
+.product-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 80px; /* Отступ от кнопки */
+}
+
+/* Стили для кнопки "Назад" */
 .back-button {
     position: fixed;
     bottom: 24px;
@@ -28,6 +79,7 @@
     max-width: 420px;
 }
 
+/* Заголовок */
 h1 {
     font-size: 24px;
     font-weight: bold;
@@ -35,38 +87,14 @@ h1 {
     text-align: center;
 }
 
-.product-container {
-    flex-grow: 1;
-    overflow-y: auto;
-    margin-bottom: 80px;
-}
-
-.product-list {
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
-}
-
-.product-item {
-    display: flex;
-    justify-content: space-between;
+/* Стили для элементов списка */
+.product-list li {
     font-size: 18px;
     margin-bottom: 12px;
-    padding: 12px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    list-style: none;
 }
 
-.product-name {
-    font-weight: bold;
-    color: #333;
-}
-
-.product-calories {
-    color: #888;
-}
-
+/* Стили для ночной темы */
 @media (prefers-color-scheme: dark) {
     .container {
         background-color: #121212;
@@ -74,19 +102,14 @@ h1 {
     }
 
     .back-button {
-        background-color: #4242FF;
-    }
-
-    .product-item {
-        background-color: #2C2C2C;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
-    }
-
-    .product-name, .product-calories {
-        color: #E0E0E0;
+        background-color: #3030B3;
     }
 
     h1 {
-        color: #ffffff;
+        color: #E0E0E0;
+    }
+
+    .product-list li {
+        color: #E0E0E0;
     }
 }
