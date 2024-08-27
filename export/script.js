@@ -4,7 +4,7 @@
 
 function clearOutput() {
     const exportArea = document.getElementById("export-area");
-    exportArea.textContent = '';
+    exportArea.value = '';
 }
 
 
@@ -36,5 +36,6 @@ function saveData () {
         // Сохраняем данные в localStorage
         localStorage.setItem('history', JSON.stringify(jsonContent));
         clearOutput();
+        alert('Данные перезаписаны!');
     }
 }
