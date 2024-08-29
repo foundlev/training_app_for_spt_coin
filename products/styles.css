@@ -61,7 +61,8 @@ body {
     text-align: center;
     background-size: cover;
     background-position: center;
-    height: 111px;
+    height: 114px;
+    width: 168px;
     display: flex;
     justify-content: center;
 }
