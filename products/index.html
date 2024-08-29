@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>Training SPT - Список продуктов</title>
+    <title>Training SPT - Данные</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#ffffff">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -14,40 +13,65 @@
     <link rel="apple-touch-icon" href="../icons/logo.png">
 </head>
 <body>
-    <div class="container">
-        <button class="back-button" onclick="window.history.back()">
+
+<!-- Текстовое поле для данных -->
+<div class="container">
+    <h1>Список продуктов</h1>
+    <div class="products-grid"></div>
+
+    <!-- Кнопка назад -->
+    <div class="back-button-wrapper">
+        <button class="back-button" onclick="back()">
             <img src="../assets/back.svg" alt="Назад">
             Назад
         </button>
+        <button class="back-button extra-button" onclick="openModal()">
+            <img src="../assets/plus.svg" class="plus-light" alt="Добавить">
+            <img src="../assets/plus_white.svg" class="plus-dark" alt="Добавить">
+            Добавить
+        </button>
+    </div>
+</div>
 
-        <h1>Список продуктов</h1>
-        <div class="product-container">
-            <ul class="product-list">
-                <li>Нагетс — 55 ккал</li>
-                <li>Стрипс — 75 ккал</li>
-                <li>Крылышко — 75 ккал</li>
-                <li>Газировка (0.5 л) — 220 ккал</li>
-                <li>Марс (50г) — 226 ккал</li>
-                <li>Куриная ножка — 229 ккал</li>
-                <li>Мороженое пломбир (100 г) — 250 ккал</li>
-                <li>Кусочек пиццы — 285 ккал</li>
-                <li>Чизбургер — 299 ккал</li>
-                <li>Пончик — 300 ккал</li>
-                <li>Пирожное блинное шоколадное — 313 ккал</li>
-                <li>Кусочек торта/пирожное — 350 ккал</li>
-                <li>Круассан с шоколадом — 350 ккал</li>
-                <li>Оладьи с шоколадной начинкой — 390 ккал</li>
-                <li>Шаурма — 599 ккал</li>
-                <li>Картошка фри (порция) — 510 ккал</li>
-                <li>Биг хит — 524 ккал</li>
-                <li>Плитка шоколада (100 г) — 530 ккал</li>
-                <li>Шоколадный маффин — 470 ккал</li>
-                <li>Чизкейк — 620 ккал</li>
-                <li>Молочный коктейль — 620 ккал</li>
-                <li>Двойной Маффин — 628 ккал</li>
-                <li>Донер кебаб — 750 ккал</li>
-            </ul>
+<!-- Модальное окно для добавления нового продукта -->
+<div id="addProductModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Новый продукт</h2>
+        <form id="addProductForm">
+            <label for="productName">Название:</label>
+            <input type="text" id="productName" name="productName" pattern="[А-Яа-яA-Za-z]{1,9}" minlength="1" maxlength="9" required autocomplete="off">
+
+            <label for="productCcal">Калории (ккал):</label>
+            <input type="number" id="productCcal" name="productCcal" min="1" max="999" required>
+
+            <div class="spt-calculation">
+                <span></span><span id="productSPT">SPT 0.00</span>
+            </div>
+
+            <button type="submit" class="submit-button">Добавить продукт</button>
+        </form>
+    </div>
+</div>
+
+<!-- Модальное окно для отображения информации о продукте -->
+<div id="productInfoModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeProductModal()">&times;</span>
+        <h2 id="modalProductCaption">Название продукта</h2>
+        <div class="spt-spending">
+            <span class="infoValueDescription">К списанию:</span><span id="modalProductSPT">SPT 0.00</span>
+        </div>
+        <div class="balance-info">
+            <span class="infoValueDescription">Баланс: </span><span id="currentBalance">SPT 0.00</span>
+        </div>
+        <div class="modal-buttons">
+            <button class="spend-button" onclick="spendSPT()">Списать</button>
+            <button class="delete-button" onclick="deleteProduct()">Удалить</button>
         </div>
     </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>

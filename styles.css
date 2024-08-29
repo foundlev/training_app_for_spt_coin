@@ -143,12 +143,29 @@ body {
 }
 
 .add-btn {
-  background-color: #63C477;
+  background: linear-gradient(45deg, #4caf50, #81c784); /* Лесной зеленый к светло-зеленому */
+  color: #fff;
+  box-shadow: 0 0 0 rgba(76, 175, 80, 0);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.add-btn.highlighted {
+  background: linear-gradient(45deg, #00c853, #66bb6a); /* Насыщенный мятный к зелено-желтому */
+  box-shadow: 0 0 15px rgba(0, 200, 83, 0.7);
   color: #fff;
 }
 
 .spend-btn {
-  background-color: #2C2C2C;
+  background: linear-gradient(45deg, #c62828, #e57373); /* Темно-красный к более светлому красному */
+  color: #fff; /* Белый цвет шрифта */
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0); /* Без тени в обычном состоянии */
+  transition: background 0.3s ease, box-shadow 0.3s ease; /* Плавный переход */
+}
+
+.spend-btn.highlighted {
+  background: linear-gradient(45deg, #d32f2f, #ff8a65); /* Ярко-красный к светло-оранжевому */
+  box-shadow: 0 0 10px rgba(211, 47, 47, 0.6); /* Подсветка в цвете градиента, чуть мягче для светлой темы */
+  transition: background 0.3s ease, box-shadow 0.3s ease;
   color: #fff;
 }
 
@@ -517,16 +534,6 @@ body {
     color: #888;
   }
 
-  .spend-btn {
-    background-color: #424242;
-    color: #E0E0E0;
-  }
-
-  .add-btn {
-    background-color: #277847;
-    color: #E0E0E0;
-  }
-
   .menu-list-btn {
     background-color: #5D4AB7;
     color: #E0E0E0;
@@ -585,5 +592,33 @@ body {
 
     .negative {
         background-color: #E57373; /* Темно-красный для ночной темы */
+    }
+
+    .spend-btn {
+      background: linear-gradient(45deg, #8e1a1a, #e64a19); /* Темно-красный к приглушенному оранжевому */
+      color: #fff; /* Белый цвет текста */
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0); /* Без тени в обычном состоянии */
+      transition: background 0.3s ease, box-shadow 0.3s ease; /* Плавный переход */
+      color: #E0E0E0;
+    }
+
+    .spend-btn.highlighted {
+      background: linear-gradient(45deg, #b71c1c, #ff7043); /* Темно-красный к оранжевому */
+      box-shadow: 0 0 15px rgba(183, 28, 28, 0.7); /* Подсветка в цвете градиента */
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .add-btn {
+      background: linear-gradient(45deg, #1b5e20, #43a047); /* Глубокий темно-зеленый к яркому зеленому */
+      box-shadow: 0 0 0 rgba(27, 94, 32, 0); /* Отсутствие тени в обычном состоянии */
+      transition: background 0.3s ease, box-shadow 0.3s ease; /* Плавный переход */
+      color: #E0E0E0; /* Светлый цвет текста для контраста */
+    }
+
+    .add-btn.highlighted {
+      background: linear-gradient(45deg, #2e7d32, #66bb6a); /* Темно-зеленый к светло-зеленому */
+      box-shadow: 0 0 15px rgba(46, 125, 50, 0.7); /* Подсветка в цвете градиента */
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      color: #E0E0E0;
     }
 }

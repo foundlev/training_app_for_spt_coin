@@ -1,9 +1,7 @@
 let selectedHistoryItem = null;
 let keyboardShow = false;
 
-// Обновление отображаемого баланса
-function updateBalanceDisplay() {
-    const balanceElement = document.querySelector('.balance-amount');
+function calculateBalance() {
     const history = JSON.parse(localStorage.getItem('history')) || [];
     let balance = 0.0;
 
@@ -14,6 +12,55 @@ function updateBalanceDisplay() {
             balance -= parseFloat(entry.spt);
         }
     });
+
+    return balance;
+}
+
+function highlightSpendButton() {
+    const spendButton = document.getElementById('spend-button');
+    spendButton.classList.add('highlighted');
+}
+
+function resetSpendButton() {
+    const spendButton = document.getElementById('spend-button');
+    spendButton.classList.remove('highlighted');
+}
+
+function highlightAddButton() {
+    const addButton = document.getElementById('add-button');
+    addButton.classList.add('highlighted');
+}
+
+function resetAddButton() {
+    const addButton = document.getElementById('add-button');
+    addButton.classList.remove('highlighted');
+}
+
+function resetAllButtons() {
+    resetAddButton();
+    resetSpendButton();
+}
+
+function checkHighlightButtons() {
+    const caloriesInput = document.getElementById('calories-input');
+    let value = caloriesInput.value.replace(/\D/g, '');
+
+    if (value.length === 0) {
+        resetSpendButton();
+        resetAddButton();
+    } else {
+        const spendButton = document.getElementById('spend-button');
+        if (!spendButton.classList.contains('highlighted')) {
+            highlightAddButton();
+        }
+    }
+}
+
+
+// Обновление отображаемого баланса
+function updateBalanceDisplay() {
+    const balanceElement = document.querySelector('.balance-amount');
+    const balance = calculateBalance();
 
     balanceElement.textContent = `SPT ${parseFloat(balance).toFixed(2)}`;
     if (balance > 0) {
@@ -119,7 +166,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const keys = document.querySelectorAll('.key[data-digit]');
     const deleteKey = document.getElementById('delete-key');
-    const inputField = document.getElementById('calories-input');
 
     const exchangeRateToSPT = 0.85182;
     const balanceSection = document.querySelector('.balance-section');
@@ -182,7 +228,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function inputDigit(digit) {
-        let value = inputField.value.replace(/\D/g, ''); // удаляем все нецифровые символы
+        let value = caloriesInput.value.replace(/\D/g, ''); // удаляем все нецифровые символы
         value += digit.toString();
         const previousLength = value.length;
 
@@ -195,27 +241,30 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Если поле пустое, оставляем его пустым, чтобы кнопка удаления работала корректно
         if (value.length === 0) {
-            inputField.value = ' ';
+            caloriesInput.value = ' ';
         } else {
-            inputField.value = `${value} ккал`; // добавляем маску
+            caloriesInput.value = `${value} ккал`; // добавляем маску
         }
         outputLabel.textContent = `SPT ${convertToSPT(value, true)}`;
+        checkHighlightButtons();
     }
 
     function deleteDigit() {
-        let value = inputField.value.replace(/\D/g, ''); // удаляем все нецифровые символы
+        let value = caloriesInput.value.replace(/\D/g, ''); // удаляем все нецифровые символы
         if (value.length > 0) {
             value = value.slice(0, -1); // удаляем последнюю цифру
-            inputField.value = value.length === 0 ? ' ' : `${value} ккал`;
+            caloriesInput.value = value.length === 0 ? ' ' : `${value} ккал`;
             outputLabel.textContent = `SPT ${convertToSPT(value, true)}`;
         } else {
             outputLabel.textContent = `SPT -`;
         }
+        checkHighlightButtons();
     }
 
     caloriesResetButton.addEventListener('click', function() {
         caloriesInput.value = ' ';
         outputLabel.textContent = `SPT -`;
+        checkHighlightButtons();
     });
 
     // Обработка добавления калорий к балансу
@@ -231,6 +280,7 @@ document.addEventListener("DOMContentLoaded", function() {
             saveHistoryEntry('Тренировка', calories, spt);
             updateBalanceDisplay();
             hideKeyboard();
+            resetAllButtons();
         }
     });
 
@@ -247,6 +297,7 @@ document.addEventListener("DOMContentLoaded", function() {
             saveHistoryEntry('Вкусное', calories, spt);
             updateBalanceDisplay();
             hideKeyboard();
+            resetAllButtons();
         }
     });
 
@@ -320,6 +371,21 @@ document.addEventListener("DOMContentLoaded", function() {
     deleteKey.addEventListener('click', function() {
         deleteDigit(); // Вызываем deleteDigit при нажатии на кнопку удаления
     });
+
+    function getURLParameter(name) {
+        return new URLSearchParams(window.location.search).get(name);
+    }
+
+    // Получаем значение параметра ccal из URL
+    const ccalValue = getURLParameter('ccal');
+    const regex = /^[1-9]\d*$/;
+
+    // Если параметр ccal существует и является числом
+    if (ccalValue && !isNaN(ccalValue) && regex.test(ccalValue)) {
+        inputDigit(ccalValue);
+        highlightSpendButton();
+        resetAddButton();
+    }
 });
 
 window.addEventListener('resize', function() {

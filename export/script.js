@@ -39,3 +39,7 @@ function saveData () {
         alert('Данные перезаписаны!');
     }
 }
+
+function back() {
+    window.location.href = `../index.html`;
+}
