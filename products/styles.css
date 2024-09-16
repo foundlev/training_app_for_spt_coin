@@ -38,10 +38,11 @@ body {
 .container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 100vh;
+    justify-content: flex-start; /* Элементы располагаются сверху */
+    height: 100vh; /* Высота контейнера равна высоте окна */
     padding: 24px;
     box-sizing: border-box;
+    min-width: 24.5em;
 }
 
 /* Контейнер для карточек продуктов */
@@ -50,8 +51,8 @@ body {
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;
     margin-top: 16px;
-    overflow-y: auto; /* Добавим скролл для продуктов */
-    flex-grow: 1; /* Контейнер занимает оставшееся пространство */
+    overflow-y: auto;
+    /* Убираем flex-grow или другие центровочные элементы, если они были */
 }
 
 /* Стили для карточек продуктов */
@@ -62,7 +63,7 @@ body {
     background-size: cover;
     background-position: center;
     height: 114px;
-    width: 168px;
+    width: 166px;
     display: flex;
     justify-content: center;
 }
@@ -124,7 +125,7 @@ h1 {
 .back-button-wrapper {
     display: flex;
     justify-content: space-between;
-    margin-top: 16px;
+    margin-top: auto; /* Это свойство заставит контейнер с кнопками оставаться внизу */
     flex-shrink: 0; /* Кнопки не сжимаются */
 }
 
