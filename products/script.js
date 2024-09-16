@@ -81,7 +81,7 @@ function updateSPT() {
 
 function validateName() {
     const productNameInput = document.getElementById('productName');
-    const pattern = /^(?! )[А-Яа-яA-Za-z0-9 ]{1,9}(?<! )$/;
+    const pattern = /^(?! )[А-Яа-яA-Za-z0-9 ]{1,14}(?<! )$/;
     return pattern.test(productNameInput.value);
 }
 
