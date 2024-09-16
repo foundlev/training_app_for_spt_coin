@@ -69,11 +69,11 @@ body {
 }
 
 .tab-debit {
-    background-image: url('../assets/tab_debit.svg');
+    background-image: url('../assets/tab_debit.png');
 }
 
 .tab-credit {
-    background-image: url('../assets/tab_credit.svg');
+    background-image: url('../assets/tab_credit.png');
 }
 
 .product-card h2 {
@@ -396,11 +396,11 @@ button img {
     }
 
     .tab-debit {
-        background-image: url('../assets/tab_debit_dark.svg');
+        background-image: url('../assets/tab_debit_dark.png');
     }
 
     .tab-credit {
-        background-image: url('../assets/tab_credit_dark.svg');
+        background-image: url('../assets/tab_credit_dark.png');
     }
 
     .spt-debit {

@@ -211,12 +211,28 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    function convertToSPT(ccal, validate = false) {
-        const result = (parseFloat(ccal) * exchangeRateToSPT).toFixed(2);
+    function convertToSPT(ccal, validate = false, multiply = 1) {
+        const result = (parseFloat(ccal) * exchangeRateToSPT * multiply).toFixed(2);
         if (validate) {
             return handleResult(result);
         }
         return result;
+    }
+
+    function convertToSpendSPT(ccal, validate = false) {
+        return convertToSPT(ccal, validate);
+    }
+
+    function convertToEarnSPT(ccal, nowBalance, validate = false) {
+        multiply = null;
+        if (nowBalance <= -1000) {
+            multiply = 2.5;
+        } else if (nowBalance <= 0) {
+            multiply = 1.7;
+        } else {
+            multiply = 1.2;
+        }
+        return convertToSPT(ccal, validate, multiply);
     }
 
     function convertToCcal(spt, validate = false) {
@@ -245,7 +261,8 @@ document.addEventListener("DOMContentLoaded", function() {
         } else {
             caloriesInput.value = `${value} ккал`; // добавляем маску
         }
-        outputLabel.textContent = `SPT ${convertToSPT(value, true)}`;
+        const balance = calculateBalance();
+        outputLabel.textContent = `SPT ↓ ${convertToSpendSPT(value, true)} ↑ ${convertToEarnSPT(value, balance, true)}`;
         checkHighlightButtons();
     }
 
@@ -254,16 +271,17 @@ document.addEventListener("DOMContentLoaded", function() {
         if (value.length > 0) {
             value = value.slice(0, -1); // удаляем последнюю цифру
             caloriesInput.value = value.length === 0 ? ' ' : `${value} ккал`;
-            outputLabel.textContent = `SPT ${convertToSPT(value, true)}`;
+            const balance = calculateBalance();
+            outputLabel.textContent = `SPT ↓ ${convertToSpendSPT(value, true)} ↑ ${convertToEarnSPT(value, balance, true)}`;
         } else {
-            outputLabel.textContent = `SPT -`;
+            outputLabel.textContent = `SPT ↓ - ↑ -`;
         }
         checkHighlightButtons();
     }
 
     caloriesResetButton.addEventListener('click', function() {
         caloriesInput.value = ' ';
-        outputLabel.textContent = `SPT -`;
+        outputLabel.textContent = `SPT ↓ - ↑ -`;
         checkHighlightButtons();
     });
 
@@ -271,9 +289,10 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelector('.add-btn').addEventListener('click', function() {
         let calories = parseFloat(caloriesInput.value.replace(/\D/g, ''));
         if (!isNaN(calories)) {
-            let spt = convertToSPT(calories);
+            const balance = calculateBalance();
+            let spt = convertToEarnSPT(calories, balance); // convertToSPT(calories);
             caloriesInput.value = ' ';
-            outputLabel.textContent = `SPT -`;
+            outputLabel.textContent = `SPT ↓ - ↑ -`;
             showNotification(`+ SPT ${spt}`, false);
 
             // Сохраняем запись в истории
@@ -288,9 +307,9 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelector('.spend-btn').addEventListener('click', function() {
         let calories = parseFloat(caloriesInput.value.replace(/\D/g, ''));
         if (!isNaN(calories)) {
-            let spt = convertToSPT(calories);
+            let spt = convertToSpendSPT(calories); // convertToSPT(calories);
             caloriesInput.value = ' ';
-            outputLabel.textContent = `SPT -`;
+            outputLabel.textContent = `SPT ↓ - ↑ -`;
             showNotification(`- SPT ${spt}`, true);
 
             // Сохраняем запись в истории
