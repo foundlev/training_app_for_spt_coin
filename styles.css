@@ -505,6 +505,41 @@ body {
     display: none;
 }
 
+
+
+/* Стили для нового уведомления обновления */
+.update-notification {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #1899ff; /* Синий цвет для информационных уведомлений */
+    color: white;
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 503;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    pointer-events: none; /* Чтобы клики проходили сквозь уведомление */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 1000;
+}
+
+.update-notification.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+.update-notification.hidden {
+    display: none;
+}
+
+.update-notification.error {
+    background-color: #ed6a60; /* Красный цвет для ошибок */
+}
+
 /* В темной теме меняем видимость */
 @media (prefers-color-scheme: dark) {
   body {
@@ -627,5 +662,15 @@ body {
       box-shadow: 0 0 15px rgba(46, 125, 50, 0.7); /* Подсветка в цвете градиента */
       transition: background 0.3s ease, box-shadow 0.3s ease;
       color: #E0E0E0;
+    }
+
+    .update-notification {
+        background-color: #26659d; /* Более тёмный синий для тёмной темы */
+        color: #E0E0E0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    .update-notification.error {
+        background-color: #ad3939; /* Более тёмный красный для тёмной темы */
     }
 }

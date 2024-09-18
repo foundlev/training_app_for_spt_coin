@@ -425,5 +425,54 @@ window.addEventListener('resize', function() {
     }
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    // Ваш существующий код...
+
+    // Элемент уведомления для обновления
+    const updateNotification = document.getElementById('update-notification');
+
+    // Функция для показа уведомления
+    function showUpdateNotification(message, isError = false) {
+        updateNotification.textContent = message;
+        updateNotification.classList.remove('hidden');
+        updateNotification.classList.add('show');
+
+        if (isError) {
+            updateNotification.classList.add('error');
+        } else {
+            updateNotification.classList.remove('error');
+        }
+
+        // Скрываем уведомление через 3 секунды
+        setTimeout(function() {
+            updateNotification.classList.remove('show');
+            setTimeout(function() {
+                updateNotification.classList.add('hidden');
+                updateNotification.classList.remove('error');
+            }, 300); // Время для анимации исчезновения
+        }, 3000);
+    }
+
+    // Обработчик для кнопки "Обновить"
+    const refreshButton = document.getElementById('refresh-button');
+
+    refreshButton.addEventListener('click', function() {
+        if (navigator.onLine) {
+            // Если есть интернет
+            showUpdateNotification('Обновляю...');
+
+            // Обновляем страницу после короткой задержки, чтобы показать уведомление
+            setTimeout(function() {
+                location.reload(true);
+            }, 1000); // Настройте задержку по необходимости
+        } else {
+            // Если нет интернета
+            showUpdateNotification('Нет сети', true);
+        }
+    });
+
+    // Ваш остальной код...
+});
+
 // Инициализация при загрузке страницы
 window.dispatchEvent(new Event('resize'));
