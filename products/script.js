@@ -157,6 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function addProduct(event) {
         event.preventDefault();
+        let products = JSON.parse(localStorage.getItem('products')) || [];
         const newProduct = {
             caption: productNameInput.value,
             ccal: parseFloat(productCcalInput.value),
