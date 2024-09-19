@@ -176,21 +176,6 @@ body {
   margin-bottom: 20px;
 }
 
-.menu-list-btn {
-  width: 100%;
-  background-color: #7C7CFF;
-  color: white;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 18px 0;
-  font-size: 18px;
-  font-weight: 500;
-  cursor: pointer;
-  border: none;
-}
-
 .menu-list-btn img {
   margin-right: 8px;
 }
@@ -270,11 +255,18 @@ body {
 
 /* Стили для дневной темы */
 .positive {
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4); /* Легкая тень для создания объема */
     background-color: #63C477;
 }
 
 .negative {
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4); /* Легкая тень для создания объема */
     background-color: #FF6C6C;
+}
+
+.reward {
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4); /* Легкая тень для создания объема */
+    background-color: #FBDB68;
 }
 
 .scrollable {
@@ -302,7 +294,7 @@ body {
 .notification {
     position: absolute;
     top: 8.2%; /* Позиционируем по центру родителя */
-    margin-top: 18px;
+    margin-top: 20px;
     background-color: #63C477;
     color: white;
     padding: 12px 16px;
@@ -378,13 +370,13 @@ body {
     cursor: pointer;
     border: none;
     border-radius: 8px;
-    background-color: #F0F0F0; /* Светло-серый фон для кнопок */
+    background-color: #e4e4e4; /* Светло-серый фон для кнопок */
     color: #333;
     transition: background-color 0.3s ease;
 }
 
 .alert-btn:last-child {
-    background-color: #D0D0D0; /* Более тёмный серый для кнопки отмены */
+    background-color: #e4e4e4; /* Более тёмный серый для кнопки отмены */
     color: #333;
 }
 
@@ -540,6 +532,167 @@ body {
     background-color: #ed6a60; /* Красный цвет для ошибок */
 }
 
+
+
+.menu-reward-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+}
+
+.menu-list-btn {
+    width: 66%;
+    background-color: #7C7CFF;
+    color: white;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 0;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+}
+
+.reward-btn {
+    width: 30%;
+    background: linear-gradient(45deg, #a770ef, #cf8bf3, #fdb99b);
+    color: white;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 0;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+}
+
+
+/* Стиль для слайдера наград */
+.reward-slider {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.slider {
+    width: 100%;
+    appearance: none;
+    height: 8px;
+    background: #ddd;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #6f6f6f;
+    cursor: pointer;
+}
+
+.reward-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #333;
+}
+
+.reward-labels span {
+    width: 33%;
+    text-align: center;
+}
+
+/* Общий стиль для модального окна */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Контейнер для контента модального окна */
+.modal-content {
+    background-color: white;
+    padding: 14px 28px;
+    font-size: 16px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+}
+
+/* Видимое состояние окна */
+.modal.show {
+    opacity: 1;
+}
+
+/* Скрытое состояние окна */
+.modal.hidden {
+    display: none;
+}
+
+/* Кнопки наград */
+.reward-slider button {
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #f1f1f1;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.apply-reward, .close-modal {
+    margin-top: 15px;
+    padding: 14px 28px;
+    font-size: 16px;
+    color: #333;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 47%;
+}
+
+.apply-reward {
+    background: linear-gradient(45deg, #a770ef, #cf8bf3, #fdb99b);
+    color: white;
+    font-weight: 600;
+}
+
+.close-modal {
+    margin-left: 3%;
+    background-color: #e4e4e4;
+}
+
+.reward-info {
+    font-size: 18px;
+    font-weight: 600; /* Чуть более толстый шрифт для акцента */
+    color: #333; /* Темный оттенок для контраста */
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    letter-spacing: 0.5px; /* Легкий интервал между буквами */
+    background: linear-gradient(45deg, #a770ef, #fdb99b); /* Красивый градиент на фоне текста */
+    -webkit-background-clip: text; /* Для создания эффекта текста с градиентом */
+    -webkit-text-fill-color: transparent; /* Для поддержки градиента в тексте */
+}
+
 /* В темной теме меняем видимость */
 @media (prefers-color-scheme: dark) {
   body {
@@ -581,6 +734,26 @@ body {
     color: #E0E0E0;
   }
 
+  .modal-content {
+    background-color: #2C2C2C;
+    color: #E0E0E0;
+  }
+
+  .reward-labels span {
+    color: #E0E0E0;
+  }
+
+
+    .reward-display {
+        color: #E0E0E0; /* Более светлый цвет для контраста с темным фоном */
+        background: linear-gradient(45deg, #7b42f6, #ff9d76); /* Градиент с более глубокими и контрастными цветами для темной темы */
+    }
+
+    .reward-btn {
+        background: linear-gradient(to top right, #ea7070, #da816e 39.92%, #1346e0);
+        color: #f2f2f2;
+    }
+
     .delete-light, .back-light, .reset-light, .export-light, .refresh-light {
         display: none;
     }
@@ -605,8 +778,22 @@ body {
     }
 
     .alert-btn:last-child {
-        background-color: #666; /* Более темный фон для кнопки отмены */
+        background-color: #444; /* Более темный фон для кнопки отмены */
         color: #E0E0E0;
+    }
+
+    .apply-reward, .close-modal {
+        background-color: #444;
+        color: #E0E0E0;
+    }
+
+    .apply-reward {
+        background: linear-gradient(to top right, #ea7070, #da816e 39.92%, #1346e0);
+        color: #f2f2f2;
+    }
+
+    .slider {
+        background: #E0E0E0;
     }
 
     .history-section-wrapper {

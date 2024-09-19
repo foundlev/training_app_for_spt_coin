@@ -43,6 +43,24 @@
     <div class="input-line"></div>
   </div>
 
+<div id="reward-modal" class="modal hidden">
+    <div class="modal-content">
+        <h3>Выберите степень награды</h3>
+        <div class="reward-slider">
+            <div class="reward-info" id="reward-info">Вознаграждение: SPT 30</div>
+            <input type="range" min="1" max="4" value="1" class="slider" id="rewardRange">
+            <div class="reward-labels">
+                <span id="small-reward-label" style="font-weight: bold;">Малая</span>
+                <span id="medium-reward-label">Средняя</span>
+                <span id="large-reward-label">Большая</span>
+                <span id="super-reward-label">Супер</span>
+            </div>
+        </div>
+        <button class="apply-reward">Применить</button>
+        <button class="close-modal">Отмена</button>
+    </div>
+</div>
+
   <!-- Кнопки -->
   <div class="buttons">
     <button class="button add-btn" id="add-button">
@@ -54,12 +72,16 @@
       Потратить
     </button>
   </div>
-    <div class="menu-btn">
-    <button class="button menu-list-btn" onclick="window.location.href='products/index.html'">
-      <img src="assets/menu.svg" alt="Меню">
-      Список продуктов
-    </button>
-  </div>
+    <div class="menu-reward-buttons">
+        <button class="button menu-list-btn" onclick="window.location.href='products/index.html'">
+          <img src="assets/menu.svg" alt="Меню">
+          Все продукты
+        </button>
+        <button class="button reward-btn" id="reward-button">
+            <img src="assets/boost.svg" alt="Буст">
+            Буст
+        </button>
+    </div>
 
   <!-- История баланса -->
   <div class="history-section-wrapper scrollable">
