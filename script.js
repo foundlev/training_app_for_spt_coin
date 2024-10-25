@@ -321,7 +321,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function convertToEarnSPT(ccal, nowBalance, validate = false) {
         multiply = null;
-        if (nowBalance <= -1000) {
+        if (nowBalance <= -3000) {
+            multiply = 4.9
+        } else if (nowBalance <= -1000) {
             multiply = 2.5;
         } else if (nowBalance <= 0) {
             multiply = 1.7;
